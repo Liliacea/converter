@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 import org.junit.Before;
@@ -125,6 +127,9 @@ public class ConverterTest {
         it.next();
     }
 
+    /**
+     * multiply invocation of hasNext
+     */
     @Test
     public void hasNextShouldReturnTheSameValuesInCaseOfMultiplyInvocation() {
         assertThat(it.hasNext(), is(true));
@@ -135,9 +140,22 @@ public class ConverterTest {
         assertThat(it.hasNext(), is(true));
     }
 
-    @Test
+    /**
+     *
+     */
+    @Test ()
     public void currentIteratorNotNull() {
-   // assertNull();
+
+        Iterator<Integer> it1 = (new ArrayList<Integer>()).iterator();
+        Iterator<Integer> it2 = (new ArrayList<Integer>()).iterator();
+        Iterator<Integer> it3 = (new ArrayList<Integer>()).iterator();
+        Iterator<Iterator<Integer>> its = Arrays.asList(it1, it2, it3).iterator();
+        Converter iteratorOfIterators = new Converter();
+        it = iteratorOfIterators.convert(its);
+
+
+
+        assertNotNull(it1);
     }
 
 }

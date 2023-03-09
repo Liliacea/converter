@@ -4,13 +4,14 @@ public class Converter {
     private Iterator<Integer> currentIterator;
 
     public Iterator<Integer> convert(Iterator<Iterator<Integer>> iterator) {
-        return new Iterator<Integer>() {
+        return new Iterator<>() {
             private void check() {
 
                 if (currentIterator == null && iterator.hasNext())
                     currentIterator = iterator.next();
                 if (!currentIterator.hasNext() && iterator.hasNext())
                     currentIterator = iterator.next();
+
             }
 
             @Override
