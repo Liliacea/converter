@@ -16,4 +16,6 @@ next генерирует NoSuchElementException, когда заканчива�
 <h3>currentIteratorNotNull</h3><br>
 currentIterator не может быть null <br>
 <h3>moreIterators</h3><br>
-Итератор работает корректно с любым количеством итераторов
+Итератор работает корректно с любым количеством итераторов <br>
+<h3>nextReturnTheSameValueIndependentlyTheMultiplyInvocationHasNext</h3><br>
+Метод hasNext без вызова next не сдвигает указатель <br>
