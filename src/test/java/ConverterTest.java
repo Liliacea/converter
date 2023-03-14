@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
@@ -11,7 +12,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
 
 /**
  * Testing convert iterate.
@@ -143,7 +143,7 @@ public class ConverterTest {
     /**
      *
      */
-    @Test ()
+    @Test()
     public void currentIteratorNotNull() {
 
         Iterator<Integer> it1 = (new ArrayList<Integer>()).iterator();
@@ -154,15 +154,15 @@ public class ConverterTest {
         it = iteratorOfIterators.convert(its);
 
 
-
-        assertNotNull(it1);
+        assertThat(it, is(notNullValue()));
     }
-    @Test ()
+
+    @Test()
     public void moreIterators() {
         Iterator<Integer> it1 = Arrays.asList(1, 2, 3).iterator();
         Iterator<Integer> it2 = Arrays.asList(4, 5, 6).iterator();
         Iterator<Integer> it3 = Arrays.asList(7, 8, 9).iterator();
-        Iterator<Integer> it4 = Arrays.asList(10,11,12).iterator();
+        Iterator<Integer> it4 = Arrays.asList(10, 11, 12).iterator();
         Iterator<Iterator<Integer>> its = Arrays.asList(it1, it2, it3, it4).iterator();
         Converter iteratorOfIterators = new Converter();
         it = iteratorOfIterators.convert(its);
@@ -178,8 +178,21 @@ public class ConverterTest {
         assertThat(it.next(), is(8));
         assertThat(it.next(), is(9));
         assertThat(it.next(), is(10));
-        assertThat(it.next(),is(11));
+        assertThat(it.next(), is(11));
         assertThat(it.next(), is(12));
     }
 
+    @Test()
+    public void nextReturnTheSameValueIndependentlyTheMultiplyInvocationHasNext() {
+
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(1));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(2));
+
+    }
 }
